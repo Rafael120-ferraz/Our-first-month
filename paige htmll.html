@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our First Month 💖 (first of many i hope 🧐 )</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #fff0f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        header {
+            background: #ff69b4;
+            color: white;
+            padding: 50px 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+        section {
+            padding: 40px 20px;
+            max-width: 700px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            color: #ff1493;
+        }
+        a {
+            color: #ff1493;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .photo-container img {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            object-fit: cover;
+            background: linear-gradient(145deg, #ffe6f0, #ffd6eb);
+            padding: 8px;
+            box-shadow: 0px 4px 15px rgba(255, 105, 180, 0.4);
+        }
+        .me-pic {
+            transform: scaleX(-1);
+        }
+        @media (max-width: 600px) {
+            .photo-container img {
+                width: 90%;
+                height: auto;
+            }
+        }
+        footer {
+            background: #ff69b4;
+            color: white;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .button {
+            display: inline-block;
+            background: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .button:hover {
+            background: #ff69b4;
+        }
+        .loveMessage {
+            font-size: 1.5em;
+            color: #ff1493;
+            margin: 5px 0;
+            animation: pop 0.5s ease-out;
+        }
+        #compliment {
+            font-size: 1.2em;
+            color: #ff1493;
+            margin: 15px 0;
+            transition: 0.3s ease;
+        }
+        @keyframes pop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        /* Floating hearts */
+        .heart {
+            position: fixed;
+            color: #ff69b4;
+            animation: floatUp 5s linear forwards;
+            font-size: 20px;
+            opacity: 0.8;
+            z-index: 0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.5) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Happy 1 Month, My Love 💖</h1>
+        <p>Even from far away, you’re always close to my heart. I'm truly so in love with you baby, I love you so much</p>
+    </header>
+
+    <section>
+        <h2>Our First Month Memoriessssss</h2>
+        <p>Every moment we’ve shared has been special. This is the reason for that picccc:</p>
+        <div class="photo-container">
+            <img src="me.png" alt="Me">
+            <img src="her.png" alt="Her">
+        </div>
+        <p>Feels like we’re looking at each other even from far away ❤️</p>
+    </section>
+
+    <section>
+        <h2>100 reasons why i love you 💖</h2>
+        <p>Soooo i know youve seen this already but i wanted to put it on here toooo</p>
+        <a href="things_i_love_about_you.pdf" class="button" target="_blank">100 reasons</a>
+    </section>
+
+    <section>
+        <h2>Our Playlist 🎵</h2>
+        <p>So i kind of put ur present into my presenttt (im so smart i knoww)</p>
+        <iframe 
+            src="https://open.spotify.com/embed/playlist/5KIyB1wnLgxmS62lKaBtfg?utm_source=generator" 
+            width="300" 
+            height="380" 
+            frameborder="0" 
+            allowtransparency="true" 
+            allow="encrypted-media">
+        </iframe>
+    </section>
+
+    <section>
+        <h2>Countdown for me telling you I love you ❤️</h2>
+        <p id="countdown"></p>
+        <div id="loveMessages"></div>
+    </section>
+
+    <!-- Random Compliment Generator -->
+    <section>
+        <h2>Random Compliment for You 💌</h2>
+        <p id="compliment">Click the button to get a compliment 💖</p>
+        <button class="button" onclick="showCompliment()">Get Compliment</button>
+    </section>
+
+    <footer>
+        <p>Made with ❤️ for Paige by Rafael </p>
+    </footer>
+
+    <script>
+        const countdownEl = document.getElementById("countdown");
+        const loveEl = document.getElementById("loveMessages");
+
+        function updateCountdown() {
+            const now = new Date();
+            const nextHour = new Date();
+            nextHour.setHours(now.getHours() + 1, 0, 0, 0);
+            const diff = nextHour - now;
+
+            const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+            const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+            countdownEl.innerHTML = `Next I love you in: ${minutes}m ${seconds}s`;
+        }
+
+        function addLoveMessage() {
+            if (loveEl.childElementCount >= 3) {
+                loveEl.removeChild(loveEl.firstChild);
+            }
+            const msg = document.createElement('p');
+            msg.textContent = 'I love you ❤️';
+            msg.className = 'loveMessage';
+            loveEl.appendChild(msg);
+        }
+
+        let lastHour = new Date().getHours();
+
+        setInterval(() => {
+            const now = new Date();
+            updateCountdown();
+
+            if (now.getHours() !== lastHour) {
+                addLoveMessage();
+                lastHour = now.getHours();
+            }
+        }, 1000);
+
+        updateCountdown();
+
+        // Floating hearts generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 400);
+
+        // Random Compliments
+        const compliments = [
+            "You make my heart smile ❤️",
+            "I’m the luckiest person to have you 💕",
+            "Every time I see you, I fall in love again",
+            "You are my favorite person 🥰",
+            "Your laugh is my favorite sound in the world ",
+            "You make every day perfect ✨",
+            "I love how you always know how to make me smile 😊",
+            "I love being ur bf",
+            "I love the way you love me 💖",
+            "I love you, Paige"
+        ];
+
+        function showCompliment() {
+            const randomIndex = Math.floor(Math.random() * compliments.length);
+            document.getElementById("compliment").textContent = compliments[randomIndex];
+        }
+    </script>
+
+</body>
+</html>
